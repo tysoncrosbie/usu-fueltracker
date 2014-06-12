@@ -1,0 +1,4 @@
+
+DEVISE_MAILER_SENDER: no-reply@flightfuel.com
+
+ROLES: [admin, dispatcher]

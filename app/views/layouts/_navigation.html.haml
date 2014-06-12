@@ -1,13 +1,15 @@
--# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-default.navbar-fixed-top
-  .container
-    .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+.header
+  %ul.nav.nav-pills.pull-right
+    - if user_signed_in?
+      -if current_user.has_role? 'admin'
+        %li=link_to 'Admin', admin_root_path
+      -if current_user.has_role? 'dispatcher'
+        %li=link_to 'Receipts', admin_receipts_path
+      -# %li= link_to 'Edit account', edit_user_registration_path
+      %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+    -else
+      %li= link_to 'Login', '#sign_in', 'data-toggle' => 'modal', class: 'btn btn-small'
+  %h3.text-muted
+    =image_tag 'usu-aviation.jpg', class: 'img-responsive pull-left', width: 100
+    USU Aviation Fuel Tracker
+

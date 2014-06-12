@@ -1,0 +1,16 @@
+.row
+  .col-md-4.col-md-offset-4
+    .well
+      %h2 Sign in!
+      = semantic_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+        = f.input :email, label: false, placeholder: 'jane@domain.com', autofocus: true
+        = f.input :password, label: false, placeholder: 'password', autocomplete: 'off'
+
+        - if devise_mapping.rememberable?
+          = f.input :remember_me, as: :boolean, label: t('.remember_me')
+
+        = f.action :submit, label: 'Sign in', button_html: { class: 'btn btn-success' }
+
+      %hr/
+
+      = render "devise/shared/links"
