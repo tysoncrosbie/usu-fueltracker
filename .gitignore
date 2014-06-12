@@ -17,7 +17,6 @@
 
 # minimal Rails specific artifacts
 db/*.sqlite3
-/db/*.sqlite3-journal
 /log/*
 /tmp/*
 
@@ -25,6 +24,7 @@ db/*.sqlite3
 **.war
 *.rbc
 *.sassc
+.rspec
 .redcar/
 .sass-cache
 /config/config.yml
@@ -44,6 +44,7 @@ db/*.sqlite3
 /cache
 /capybara*
 /capybara-*.html
+/solr
 /gems
 /specifications
 rerun.txt
@@ -74,6 +75,14 @@ pickle-email-*.html
 # vim artifacts
 **.swp
 
-# Environment files that may contain sensitive data
-.env
-.powenv
+# Ignore application configuration
+/config/application.yml
+
+# Generated Translations file
+/public/javascripts/translations.js
+
+# Simplecov code coverage files
+coverage
+
+# Shell scripts (startup, etc)
+*.sh

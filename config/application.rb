@@ -1,12 +1,12 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
+require 'csv'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module FlightFuel
+module AviationFuelTracker
   class Application < Rails::Application
 
     config.generators do |g|
@@ -19,6 +19,9 @@ module FlightFuel
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

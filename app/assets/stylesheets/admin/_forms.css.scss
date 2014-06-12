@@ -1,0 +1,155 @@
+#active_admin_content {
+  #_sidebar_section {
+    display: none;
+  }
+  form {
+    .ui-helper-hidden-accessible {
+      position: absolute; left: -9999px;
+    }
+
+    legend {
+      margin-bottom: 10px;
+    }
+
+    ol {
+      &.label {
+        margin-left: 20px;
+        font-weight: bold;
+      }
+    }
+
+    .datepicker {
+      input {
+        width: 20%;
+      }
+    }
+
+    #airport_faa_code {
+      width: 4%;
+    }
+
+    #airport_city_input {
+      width: 50%;
+      label {
+        margin-right: 19%;
+      }
+    }
+
+    #airport_city {
+      width: 20%;
+      float: left;
+    }
+
+    #airport_state_input {
+      float: right;
+      margin-top: -19px;
+      width: 65%
+
+    }
+
+    #airport_state {
+      width: 4%;
+    }
+
+    &.airport, &.plane, &.receipt, &.report, &.user {
+      aside {
+        float: left;
+        width: 25%;
+
+        label {
+          float: none;
+          width: auto;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=url],
+        input[type=tel],
+        textarea {
+          width: 90%;
+        }
+
+        li {
+          padding: 10px 20px;
+
+          &.hidden {
+            padding: 0;
+          }
+        }
+
+        .inline-errors {
+          margin-left: 0;
+        }
+
+        .inline-hints {
+          margin-left: 0;
+        }
+
+        textarea.categories {
+          width: 100%;
+        }
+
+        .check_boxes, .radio {
+          padding-top: 0;
+
+          .choices {
+            legend {
+              position: relative;
+
+              label {
+                float: none;
+                margin-bottom: 3px;
+                position: relative;
+                width: auto;
+              }
+            }
+
+            .choices-group {
+              padding: 0.5em 0;
+
+              .choice {
+                padding: 0 1em;
+              }
+            }
+          }
+        }
+      }
+
+      .actions {
+        clear: both;
+      }
+
+      .main-form {
+        float: left;
+        margin-right: 2%;
+        width: 73%;
+      }
+    }
+
+    .chosen-container {
+      width: 80% !important;
+
+      ul.chosen-choices {
+        background-image: none;
+        border: 1px solid #c9d0d6;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 0.95em;
+        outline: none;
+        padding: 0 3px;
+
+                border-radius: 3px;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+      }
+    }
+
+    .tagsinput {
+      border-color: #c9d0d6;
+      width: calc(80% - 8px) !important;
+
+              border-radius: 3px;
+      -webkit-border-radius: 3px;
+         -moz-border-radius: 3px;
+    }
+  }
+}

@@ -1,146 +1,129 @@
-Flight Fuel
-=========
+![USU Aviation logo](http://www.usufueltracker.com/assets/usu-aviation.jpg)
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+# USU Aviation Fuel Tracker Application
 
-Diagnostics
--
+## Prerequisites
 
-This application was built with recipes that are NOT known to work together.
+* ```postgresql database```
+* ```ruby 2.0.0```
+* ```bundler```
+* ```foreman``` (part of heroku toolbelt)
+* ```chromedriver``` (for feature specs)
 
-This application was built with preferences that are NOT known to work
-together.
+## Setup
 
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include these diagnostics:
+Copy the appropriate ```database.yml.*``` file to ```database.yml```, within the config directory. Modify it to fit your environment. **PostgreSQL is used in production.**
 
-We’d also like to know if you’ve found combinations of recipes or
-preferences that do work together.
+Copy ```config/application.example.yml``` to ```config/application.yml``` and edit it appropriately to set environment variables.
 
-Recipes:
+From the root of the project run the following commands:
 
-* controllers
-* core
-* deployment
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* learn_rails
-* models
-* prelaunch
-* rails_bootstrap
-* rails_devise
-* rails_devise_pundit
-* rails_foundation
-* rails_omniauth
-* rails_signup_download
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* tests4
-* views
+    bundle
 
-Preferences:
+## Running Locally
 
-* git: true
-* apps4: none
-* dev_webserver: thin
-* prod_webserver: unicorn
-* database: postgresql
-* templates: haml
-* tests: rspec
-* continuous_testing: none
-* frontend: bootstrap3
-* email: none
-* authentication: devise
-* devise_modules: default
-* authorization: none
-* form_builder: none
-* starter_app: home_app
-* quiet_assets: true
-* local_env_file: foreman
-* better_errors: true
-* ban_spiders: true
+To run the application locally, use the following command from the root of the project:
 
-Ruby on Rails
----
+    foreman start -f Procfile.dev
 
-This application requires:
+## Seeding
 
--   Ruby
--   Rails
+Seed the database with values (after running Foreman) by running:
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+    rake db:setup
 
-Database
----
+## Development
 
-This application uses PostgreSQL with ActiveRecord.
+### Branching
 
-Development
--
+Create a separate branch for each story being worked on. New branches should be rooted in the ```staging``` branch. Here's a sample process to follow:
 
--   Template Engine: Haml
--   Testing Framework: Test::Unit
--   Front-end Framework: Bootstrap 3.0 (Sass)
--   Form Builder: None
--   Authentication: Devise
--   Authorization: None
--   Admin: None
+#### Creating a branch
 
+1. ```git checkout staging```
+1. ```git pull```
+1. ... fix any merge conflicts ...
+1. ```git checkout -b new-story```
+1. ... work on your story, commit, push, etc. ...
 
+#### Merging your branch into staging
 
+1. ```git checkout staging```
+1. ```git pull```
+1. ... fix any merge conflicts, commit, push, etc. ...
+1. ```git checkout new-story```
+1. ```git merge staging```
+1. ... fix any merge conflicts, run tests, commit, push, etc. ...
+1. ```git checkout staging```
+1. ```git merge new-story```
+1. ... checkin and push ...
 
+### Running Tests
 
+Tests can be run individually or as a group.
 
- delivery is disabled in development.
+Examples:
 
-Getting Started
+  1. Run all tests within in a single file:
 
+      ```rspec ./spec/models/user_spec.rb```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  1. Run a specific test in a single file (by line number):
 
-Documentation and Support
+      ```rspec ./spec/models/user_spec.rb:6```
 
+  1. Run all tests:
 
-This is the only documentation.
+      ```rake spec```
 
-#### Issues
+*Strive to keep the tests up-to-date and passing.*
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+### Inspecting Emails
 
-Similar Projects
--
+The ```mailcatcher``` gem is included in the development bundle and configured in ```development.rb```. Simply run the following command from the app directory:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    mailcatcher
 
-Contributing
---
+Now, in development, all mail will be caught via SMTP on the local machine. Navigate to [http://localhost:1080/](http://localhost:1080/) to see the emails sent in development.
 
-If you make improvements to this application, please share with others.
+## Deployment
 
--   Fork the project on GitHub.
--   Make your feature addition or bug fix.
--   Commit with Git.
--   Send the author a pull request.
+<!-- ### Staging -->
+<!--
+A staging server has been set up by [Tyson](mailto:tyson@tysoncrosbie.com) to test and examing changes before they go live in production. The staging server is a close copy of the production environment.
 
-If you add functionality to this application, create an alternative
-implementation, or build an application that is similar, please contact
-me and I’ll add a note to the README so that others can find your work.
+Run the following command to add a Git remote, so you can push changes to the staging server:
 
-Credits
---
+    git remote add staging git@heroku.com:usufueltracker-staging.git
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+*If you don't have access to the staging server, you can request it from [Tyson](mailto:tyson@tysoncrosbie.com).*
 
-License
---
+Now, deployment is as simple as:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    git push staging staging:master
+ -->
+### Production
+
+The production server houses the public-facing live application. Be very careful when deploying changes to the live application.
+
+Run the following command to add a Git remote, so you can push changes to the production server:
+
+    <!-- git remote add heroku git@heroku.com:usufueltracker.git -->
+
+*If you don't have access to the production server, you can request it from [Tyson](mailto:tyson@tysoncrosbie.com).*
+
+If changes involve updating the database schema or data, run the following commands when you deploy:
+
+  1. ```heroku maintenance:on --app usufueltracker```
+  1. ```git push heroku```
+  1. ```heroku run rake db:migrate --app usufueltracker```
+  1. *Any other rake tasks you may need to run go here...*
+  1. ```heroku restart --app usufueltracker```
+  1. *... wait for the production processes to start up ...*
+  1. ```heroku maintenance:off --app usufueltracker```
+
+If you're not changing the database schema or data, then you can probably just run:
+
+    git push heroku
+
+Be sure to monitor the deployment to ensure that it completes, the server restarts and the site is still publicly accessible.

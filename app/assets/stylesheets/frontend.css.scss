@@ -1,0 +1,11 @@
+.btn {
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover, &:link, &:visited {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}

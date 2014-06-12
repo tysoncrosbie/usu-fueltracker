@@ -2,14 +2,18 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'Flight Fuel'
+    %title= content_for?(:title) ? yield(:title) : 'Aviation Fuel Tracker'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Flight Fuel'}"}
+    %link{ href: '/favicon.ico', rel: 'shortcut icon' }
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    %header
+    = render 'home/sign_in_modal'
+    .container
       = render 'layouts/navigation'
-    %main{:role => "main"}
       = render 'layouts/messages'
+
       = yield
+

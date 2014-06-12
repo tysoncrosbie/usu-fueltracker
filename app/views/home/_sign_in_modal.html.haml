@@ -1,0 +1,22 @@
+#sign_in.modal.fade
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        %a.close{"data-dismiss" => "modal", type: 'button'} ×
+        %h2.modal-title Login
+
+      .modal-body
+        = semantic_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+          = f.input :email, label: false, placeholder: 'jane@domain.com', autofocus: true
+          = f.input :password, label: false, placeholder: 'password', autocomplete: 'off'
+
+          - if devise_mapping.rememberable?
+            = f.input :remember_me, as: :boolean, label: t('.remember_me')
+
+          = f.action :submit, label: 'Login', button_html: { class: 'btn btn-success' }
+
+      .modal-footer
+        = render "devise/shared/links"
+
+
+
