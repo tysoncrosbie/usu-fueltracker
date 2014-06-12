@@ -1,6 +1,6 @@
-![LFA logo](http://www.localfirstaz.com/aassets-usufueltrackerz/sitewide/2013/header-logo.gif)
+![USU Aviation logo](http://www.usufueltracker.com/assets/usu-aviation.jpg)
 
-# Local First Arizona Web Application
+# USU Aviation Fuel Tracker Application
 
 ## Prerequisites
 
