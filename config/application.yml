@@ -1,4 +1,11 @@
+ADMIN_NAME: Tyson Crosbie
+ADMIN_EMAIL: tyson@tysoncrosbie.com
+ADMIN_PASSWORD: password
 
-DEVISE_MAILER_SENDER: no-reply@flightfuel.com
+DOMAIN: usufueltracker.com
+
+DEVISE_MAILER_SENDER: no-reply@usufueltracker.com
 
 ROLES: [admin, dispatcher]
+
+SECRET_TOKEN: 1b9b8a154ee3124baa8649ed7b03ba40330147a1ca2c5ae42a842caf7e76ef7355f1e9710d3db03247512f7ba5e92f68d2c3d47fe535328bcaac64e516ec4d42
