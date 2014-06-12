@@ -33,7 +33,7 @@ AviationFuelTracker::Application.configure do
   config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
+  config.assets.version = '1.1'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -60,10 +60,27 @@ AviationFuelTracker::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w(
+    active_admin.js
+    active_admin.css
+    compatibility/html5shiv
+    compatibility/respond.min
+  )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN'] }
+  config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: '587',
+    authentication: :plain,
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: 'heroku.com',
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -79,5 +96,5 @@ AviationFuelTracker::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  # config.active_record.dump_schema_after_migration = false
 end

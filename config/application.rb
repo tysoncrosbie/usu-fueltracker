@@ -4,20 +4,16 @@ require 'csv'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+Bundler.require(:default, Rails.env)
 
 module AviationFuelTracker
   class Application < Rails::Application
 
     config.generators do |g|
-      g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: false,
-        request_specs: false
+      g.test_framework :rspec, fixtures: true,
       g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.view_specs false
+      g.helper_specs false
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
