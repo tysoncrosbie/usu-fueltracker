@@ -1,15 +1,12 @@
 puts
-puts 'Creating Admin'
+puts 'Creating Admins'
 
 user = User.where(email: 'tyson@tysoncrosbie.com').first_or_create name: 'Tyson Crosbie', password: 'password'
 user.add_role :admin
 puts " - #{user.name}"
 
-puts
-puts 'Creating Dispatcher'
-
-user = User.where(email: 'susan@crosbie.com').first_or_create name: 'Susan Crosbie', password: 'password'
-user.add_role :dispatcher
+user = User.where(email: 'susan.crosbie@usu.edu').first_or_create name: 'Susan Crosbie', password: 'changethis'
+user.add_role :admin
 puts " - #{user.name}"
 
 

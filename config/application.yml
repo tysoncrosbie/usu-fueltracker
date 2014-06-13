@@ -5,6 +5,7 @@ ADMIN_PASSWORD: password
 DOMAIN: usufueltracker.com
 
 DEVISE_MAILER_SENDER: no-reply@usufueltracker.com
+DEVISE_SECRET: '088f54277c29fba5937203bc43cf947b719a9ad6514023750d5f9cadd3a7c35fee2558bf65d05582e496a145c715adf31ae642fa24e88455177da830cc1de4e8'
 
 ROLES: [admin, dispatcher]
 
