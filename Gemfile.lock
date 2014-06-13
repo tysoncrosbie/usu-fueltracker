@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/EppO/rolify.git
+  revision: befc8db8d1894cc2fe86407dbedc1aebb3f3592f
+  specs:
+    rolify (3.4.0)
+
+GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 3d7605f82706c8e107852f44c61ba6d8e9f2100d
   specs:
@@ -246,7 +252,6 @@ GEM
     ref (1.0.5)
     responders (1.1.0)
       railties (>= 3.2, < 5)
-    rolify (3.4.0)
     rspec-core (3.0.0)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.0)
@@ -381,7 +386,7 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor (~> 0.0.2)
   rails_layout
-  rolify (~> 3.4.0)
+  rolify!
   rspec-rails (~> 3.0.1)
   sass-rails (~> 4.0.3)
   selenium-webdriver (~> 2.35.1)

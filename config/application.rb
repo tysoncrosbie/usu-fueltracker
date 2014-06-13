@@ -15,7 +15,7 @@ module AviationFuelTracker
       g.view_specs false
       g.helper_specs false
     end
-    config.assets.initialize_on_precompile = false
+
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
 
