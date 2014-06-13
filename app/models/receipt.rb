@@ -30,6 +30,4 @@ class Receipt < ActiveRecord::Base
   validates :receipt_number, :receipt_date, :vendor_name, presence: true
   validates :gallons, :fuel_cost, presence: true, numericality: true
 
-
-
 end
