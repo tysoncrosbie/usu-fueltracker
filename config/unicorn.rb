@@ -10,14 +10,6 @@ before_fork do |server, worker|
 
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
-
-  old_pid = "#{server.config[:pid]}.oldbin"
-  if File.exists?(old_pid) && server.pid != old_pid
-    begin
-      Process.kill("QUIT", File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-    end
-  end
 end
 
 after_fork do |server, worker|
@@ -25,11 +17,6 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
-  if defined?(ActiveRecord::Base)
-    config = Rails.application.config.database_configuration[Rails.env]
-    config['reaping_frequency'] = ENV['DB_REAP_FREQ'] && ENV['DB_REAP_FREQ'].to_i || 10 # seconds
-    config['pool']              = ENV['DB_POOL'] && ENV['DB_POOL'].to_i || 2
-
-    ActiveRecord::Base.establish_connection(config)
-  end
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
 end
