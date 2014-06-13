@@ -5,19 +5,30 @@ en:
       hints:
 
       labels:
+
         user:
           edit:
             email: "Email Address"
             name: "Full Name"
             password: "New Password"
             password_confirmation: "Confirm New Password"
-            phone: "Phone Number"
 
       placeholders:
 
       titles:
         update_password: "Update Your Password"
-
+        airport:
+          airport_details: "Airport Details"
+        non_fuel_charge:
+        plane:
+          plane_details: "Plane Details"
+          status: "Current plane status."
+        receipt:
+          non_fuel_charges: "Are there any Non Fuel Charges?"
+          receipt_details: "Receipt Details"
+          reciept_status: "Current reciept status."
+        report:
+          report_details: "Report Details"
         user:
           passwords: "Change this user's password."
           roles: "What type of user is this?"

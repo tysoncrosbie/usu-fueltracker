@@ -1,4 +1,4 @@
-![USU Aviation logo](http://www.usufueltracker.com/assets/usu-aviation.jpg)
+![USU Aviation logo](http://www.usufueltracker.com/images/usu-aviation.jpg)
 
 # USU Aviation Fuel Tracker Application
 
@@ -88,27 +88,13 @@ Now, in development, all mail will be caught via SMTP on the local machine. Navi
 
 ## Deployment
 
-<!-- ### Staging -->
-<!--
-A staging server has been set up by [Tyson](mailto:tyson@tysoncrosbie.com) to test and examing changes before they go live in production. The staging server is a close copy of the production environment.
-
-Run the following command to add a Git remote, so you can push changes to the staging server:
-
-    git remote add staging git@heroku.com:usufueltracker-staging.git
-
-*If you don't have access to the staging server, you can request it from [Tyson](mailto:tyson@tysoncrosbie.com).*
-
-Now, deployment is as simple as:
-
-    git push staging staging:master
- -->
 ### Production
 
 The production server houses the public-facing live application. Be very careful when deploying changes to the live application.
 
 Run the following command to add a Git remote, so you can push changes to the production server:
 
-    <!-- git remote add heroku git@heroku.com:usufueltracker.git -->
+    <!-- git remote add heroku git@heroku.com:usu-fueltracker.git -->
 
 *If you don't have access to the production server, you can request it from [Tyson](mailto:tyson@tysoncrosbie.com).*
 

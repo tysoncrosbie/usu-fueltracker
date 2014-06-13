@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def unauthorized_redirect(*args)
     message = ""
     message = args[0].message unless args.blank?
-    redirect_to (user_signed_in? ? main_app.root_path : main_app.new_user_session_path), alert: message
+    redirect_to (main_app.root_path), alert: message
   end
 
   def authorize_admin!

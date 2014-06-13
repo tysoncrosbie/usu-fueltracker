@@ -5,8 +5,8 @@ class UsuEnvironmental < Report
 
     CSV.generate do |csv|
       months = (self.starts_on..self.ends_on).collect {|d| d.strftime('%Y - %B')}.uniq
-      csv << [''] + months.collect {|m| [m,'']}.flatten
-      csv << ['Plane'] + months.collect {|m| ['Gallons', 'Fuel Cost']}.flatten + ['Total Gallons', 'Total Cost']
+      csv << ['Plane Tail Number'] + months.collect {|m| [m,'']}.flatten
+      csv << [''] + months.collect {|m| ['Gallons', 'Fuel Cost']}.flatten + ['Total Yearly Gallons', 'Total Yearly Cost']
 
       Plane.all.group_by(&:fuel_type).each do |fuel_type, planes|
 
@@ -37,7 +37,7 @@ class UsuEnvironmental < Report
           default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
         end
 
-        csv << ["#{fuel_type} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
+        csv << ["#{fuel_type.upcase} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
 
       end
 

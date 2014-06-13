@@ -63,7 +63,7 @@ ActiveAdmin.register Report do
     f.form_buffers.last << f.send(:with_new_form_buffer) do
       f.template.content_tag :div, class: 'main-form' do
 
-        f.inputs :report_type do
+        f.inputs :report_details do
           f.input :type, label: "Report type", as: :radio, collection: [[ 'Utah TAP', 'UtahTap'], ['USU Environmental', 'UsuEnvironmental' ]]
           f.input :name, placeholder: "2014 USU First Quarter Tax Report"
           f.input :starts_on, as: :datepicker

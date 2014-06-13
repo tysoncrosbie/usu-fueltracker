@@ -93,8 +93,8 @@ ActiveAdmin.register Receipt do
   end
 
   filter :receipt_date
-  # filter :plane_id, as: :select, collection: Plane.all.map{|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id]}
-  filter :receipt_number, as: :select
+  filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
+  filter :receipt_number
   filter :vendor_name, as: :select
 
   show do
@@ -166,19 +166,19 @@ ActiveAdmin.register Receipt do
     f.form_buffers.last << f.send(:with_new_form_buffer) do
       f.template.content_tag :div, class: 'main-form' do
 
-        f.inputs :receipt do
+        f.inputs :receipt_details do
           f.input :plane_id, as: :chosen, collection: Plane.all.map{|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id]}
           f.input :airport_id, as: :chosen, collection: Airport.all.map{|a| ["#{a.faa_code} - #{a.airport_name} - #{a.city}, #{a.state}", a.id] },
             hint: "Airport not listed? #{link_to('Create a new Airport', new_admin_airport_path)}".html_safe
-          f.input :receipt_number, hint: 'Receipt or Invoice number associated with charge.'
+          f.input :receipt_number, label: 'Receipt / Invoice number', hint: 'Receipt or Invoice number associated with charge.'
           f.input :receipt_date, as: :datepicker, hint: 'Date of charge.'
           f.input :vendor_name
-          f.input :gallons, label: "Total Gallons Purchased", placeholder: "000"
+          f.input :gallons, label: "Total Gallons Purchased", placeholder: "000.0"
           f.input :fuel_cost, as: :number, label: "Fuel Total Cost", placeholder: "55.00"
         end
 
         f.inputs :non_fuel_charges do
-          f.has_many :non_fuel_charges, allow_destroy: true, heading: "Non-Fuel Charges" do |nf|
+          f.has_many :non_fuel_charges, allow_destroy: true do |nf|
             nf.input :student_name
             nf.input :charge_type, placeholder: 'Hangar Fee, Tie-down Fee'
             nf.input :amount, placeholder: '55.00'
@@ -189,7 +189,7 @@ ActiveAdmin.register Receipt do
 
     f.form_buffers.last << f.send(:with_new_form_buffer) do
       f.template.content_tag(:aside) do
-        f.inputs :status do
+        f.inputs :reciept_status do
           f.input :status, as: :radio, collection: [:pending, :verified], member_label: -> (s) { (s.to_s.humanize) }
         end
       end

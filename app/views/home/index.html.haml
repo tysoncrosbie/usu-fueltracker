@@ -10,5 +10,5 @@
     .btn.btn-danger=link_to 'Sign out', destroy_user_session_path, method: :delete
   -else
     %h2 Please Login
-    %p.lead Login to get started tracking your reciepts.
+    %p.lead Login to get started tracking your receipts.
     .btn.btn-success= link_to 'Login', '#sign_in', 'data-toggle' => 'modal'
