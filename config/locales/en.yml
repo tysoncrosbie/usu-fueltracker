@@ -26,7 +26,7 @@ en:
         receipt:
           non_fuel_charges: "Are there any Non Fuel Charges?"
           receipt_details: "Receipt Details"
-          reciept_status: "Current reciept status."
+          reciept_status: "Current receipt status."
         report:
           report_details: "Report Details"
         user:
