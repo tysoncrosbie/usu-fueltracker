@@ -100,13 +100,13 @@ Run the following command to add a Git remote, so you can push changes to the pr
 
 If changes involve updating the database schema or data, run the following commands when you deploy:
 
-  1. ```heroku maintenance:on --app usufueltracker```
+  1. ```heroku maintenance:on --app usu-fueltracker```
   1. ```git push heroku```
-  1. ```heroku run rake db:migrate --app usufueltracker```
+  1. ```heroku run rake db:migrate --app usu-fueltracker```
   1. *Any other rake tasks you may need to run go here...*
-  1. ```heroku restart --app usufueltracker```
+  1. ```heroku restart --app usu-fueltracker```
   1. *... wait for the production processes to start up ...*
-  1. ```heroku maintenance:off --app usufueltracker```
+  1. ```heroku maintenance:off --app usu-fueltracker```
 
 If you're not changing the database schema or data, then you can probably just run:
 
