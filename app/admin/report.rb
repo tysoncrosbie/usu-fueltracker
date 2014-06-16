@@ -49,8 +49,6 @@ ActiveAdmin.register Report do
   end
 
   filter :name, as: :select
-  filter :starts_on
-  filter :ends_on
 
 
   form do |f|
