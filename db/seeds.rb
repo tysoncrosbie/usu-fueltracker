@@ -21,6 +21,8 @@ end
 
 require File.expand_path('db/seeds/airports.rb')
 require File.expand_path('db/seeds/planes.rb')
+require File.expand_path('db/seeds/receipts.rb')
+
 
 
 

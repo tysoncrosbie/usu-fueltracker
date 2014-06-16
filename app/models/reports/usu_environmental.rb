@@ -1,8 +1,6 @@
 class UsuEnvironmental < Report
 
   def to_csv
-    utah_airports = Airport.utah_airports
-
     CSV.generate do |csv|
       months = (self.starts_on..self.ends_on).collect {|d| d.strftime('%Y - %B')}.uniq
       csv << ['Plane Tail Number'] + months.collect {|m| [m,'']}.flatten
@@ -11,7 +9,7 @@ class UsuEnvironmental < Report
       Plane.all.group_by(&:fuel_type).each do |fuel_type, planes|
 
         planes.each do |plane|
-          totals = plane.receipts.where(airport_id: utah_airports).in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
+          totals = plane.receipts.in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
 
           default_totals = {}
           (self.starts_on..self.ends_on).collect {|d| d.month }.uniq.each do |month|
@@ -19,14 +17,14 @@ class UsuEnvironmental < Report
           end
 
           totals.each do |t|
-            default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
+            default_totals[t.month.to_i] = [t.gallons_total, t.fuel_cost_total]
           end
 
-          csv << ["#{plane.tail_number} - #{plane.plane_type}"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
+          csv << ["#{plane.tail_number} - #{plane.plane_type}"] + default_totals.values.flatten + [default_totals.values.sum(&:first), default_totals.values.sum(&:last)]
         end
 
 
-        subtotals = Receipt.where(airport_id: utah_airports).where(plane_id: planes).in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
+        subtotals = Receipt.where(plane_id: planes).in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
 
         default_totals = {}
         (self.starts_on..self.ends_on).collect {|d| d.month }.uniq.each do |month|
@@ -34,14 +32,14 @@ class UsuEnvironmental < Report
         end
 
         subtotals.each do |t|
-          default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
+          default_totals[t.month.to_i] = [t.gallons_total, t.fuel_cost_total]
         end
 
-        csv << ["#{fuel_type.upcase} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
+        csv << ["#{fuel_type.upcase} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first), default_totals.values.sum(&:last)]
 
       end
 
-      yearly_totals = Receipt.where(airport_id: utah_airports).in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
+      yearly_totals = Receipt.in_report(self.starts_on, self.ends_on).select("DATE_PART('month', receipts.receipt_date) as month, SUM(receipts.gallons) as gallons_total, SUM(receipts.fuel_cost) as fuel_cost_total").group('month')
 
       default_totals = {}
       (self.starts_on..self.ends_on).collect {|d| d.month }.uniq.each do |month|
@@ -49,10 +47,10 @@ class UsuEnvironmental < Report
       end
 
       yearly_totals.each do |t|
-        default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
+        default_totals[t.month.to_i] = [t.gallons_total, t.fuel_cost_total]
       end
 
-        csv << ['TOTALS'] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
+        csv << ['TOTALS'] + default_totals.values.flatten + [default_totals.values.sum(&:first), default_totals.values.sum(&:last)]
 
     end
   end
