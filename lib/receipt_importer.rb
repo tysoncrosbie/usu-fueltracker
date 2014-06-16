@@ -13,15 +13,15 @@ class ReceiptImporter
 
           total_count += 1
 
-          receipt = Receipt.where(id: row[0]).first_or_initialize
+          receipt = Receipt.where(id: row[0].to_i).first_or_initialize
 
-          receipt.plane_id        = row[1]
-          receipt.airport_id      = row[2]
+          receipt.plane_id        = row[1].to_i
+          receipt.airport_id      = row[2].to_i
           receipt.receipt_number  = row[3]
-          receipt.receipt_date    = row[4]
+          receipt.receipt_date    = row[4].to_date
           receipt.vendor_name     = row[5]
-          receipt.gallons         = row[6]
-          receipt.fuel_cost       = row[7]
+          receipt.gallons         = row[6].to_i
+          receipt.fuel_cost       = row[7].to_i
 
 
           begin
