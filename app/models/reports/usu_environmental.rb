@@ -20,7 +20,7 @@ class UsuEnvironmental < Report
             default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
           end
 
-          csv << ["#{plane.tail_number} - #{plane.plane_type}"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f.round(2), default_totals.values.sum(&:last).to_f.round(2)]
+          csv << ["#{plane.tail_number} - #{plane.plane_type}"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
         end
 
 
@@ -35,7 +35,7 @@ class UsuEnvironmental < Report
           default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
         end
 
-        csv << ["#{fuel_type.upcase} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f.round(2), default_totals.values.sum(&:last).to_f.round(2)]
+        csv << ["#{fuel_type.upcase} SUBTOTAL"] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
 
       end
 
@@ -50,7 +50,7 @@ class UsuEnvironmental < Report
         default_totals[t.month.to_i] = [t.gallons_total.to_f, t.fuel_cost_total.to_f]
       end
 
-        csv << ['TOTALS'] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f.round(2), default_totals.values.sum(&:last).to_f.round(2)]
+        csv << ['TOTALS'] + default_totals.values.flatten + [default_totals.values.sum(&:first).to_f, default_totals.values.sum(&:last).to_f]
 
     end
   end
