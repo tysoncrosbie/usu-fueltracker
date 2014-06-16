@@ -20,8 +20,8 @@ class ReceiptImporter
           receipt.receipt_number  = row[3]
           receipt.receipt_date    = row[4].to_date
           receipt.vendor_name     = row[5]
-          receipt.gallons         = row[6].to_i
-          receipt.fuel_cost       = row[7].to_i
+          receipt.gallons         = row[6].to_f
+          receipt.fuel_cost       = row[7].to_f
 
 
           begin
