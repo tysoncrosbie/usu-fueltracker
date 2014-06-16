@@ -30,18 +30,14 @@ class Receipt < ActiveRecord::Base
   validates :receipt_number, :receipt_date, :vendor_name, presence: true
   validates :gallons, :fuel_cost, presence: true, numericality: true
 
-  def slug_plane
-    self.plane_id
-  end
-
-  def slug_date
-    self.receipt_date
+  def slug_id
+    self.id
   end
 
   def title_candidates
     [
       :receipt_number,
-      [:slug_plane, :slug_date, :receipt_number]
+      [:slug_id, :receipt_number]
     ]
   end
 
