@@ -12,6 +12,10 @@ ActiveAdmin.register Airport do
       end
     end
 
+    def edit
+      @page_title = 'Edit '+resource.airport_name
+    end
+
     def update
       super do |success,failure|
         success.html { redirect_to admin_airports_path }

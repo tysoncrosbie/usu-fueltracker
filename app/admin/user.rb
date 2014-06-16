@@ -9,6 +9,10 @@ ActiveAdmin.register User do
       end
     end
 
+    def edit
+      @page_title = 'Edit '+resource.name
+    end
+
     def update
       current_user_id = current_user.id
 

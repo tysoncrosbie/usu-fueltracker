@@ -6,8 +6,8 @@ ActiveAdmin.register Plane do
       params.permit plane: [:fuel_type, :tail_number, :plane_type, :slug, :status]
     end
 
-    def show
-      @page_title = "Tail Number: "+resource.tail_number
+    def edit
+      @page_title = "Edit Plane w/Tail Number: "+resource.tail_number
     end
 
     def create
@@ -105,7 +105,7 @@ ActiveAdmin.register Plane do
           f.input :fuel_type, as: :radio, collection: Plane.all.map(&:fuel_type).uniq
         end
 
-        f.inputs :status do
+        f.inputs :plane_status do
           f.input :status, as: :radio, collection: [:active, :inactive], member_label: -> (s) { (s.to_s.humanize) }
         end
       end

@@ -7,8 +7,8 @@ ActiveAdmin.register NonFuelCharge do
       params.permit non_fuel_charge: [:receipt_id, :student_name, :charge_type, :amount, :status]
     end
 
-    def show
-      @page_title = "Non Fuel Charge for "+resource.student_name
+    def edit
+      @page_title = "Edit Non Fuel Charge for "+resource.student_name
     end
 
     def create

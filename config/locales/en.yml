@@ -22,7 +22,7 @@ en:
         non_fuel_charge:
         plane:
           plane_details: "Plane Details"
-          status: "Current plane status."
+          plane_status: "Current plane status."
         receipt:
           non_fuel_charges: "Are there any Non Fuel Charges?"
           receipt_details: "Receipt Details"

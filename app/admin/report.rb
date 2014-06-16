@@ -6,12 +6,14 @@ ActiveAdmin.register Report do
     end
 
     def show
-      @page_title = resource.name
-
       respond_to do |format|
         format.html
         format.csv { send_data @report.to_csv, filename: "#{@report.name}.csv" }
       end
+    end
+
+    def edit
+      @page_title = resource.name
     end
 
     def create
