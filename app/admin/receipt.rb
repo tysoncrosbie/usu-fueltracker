@@ -12,6 +12,10 @@ ActiveAdmin.register Receipt do
       ]
     end
 
+    def show
+      @page_title = "Receipt / Invoice number "+resource.receipt_number
+    end
+
     def edit
       @page_title = "Receipt / Invoice number "+resource.receipt_number
     end

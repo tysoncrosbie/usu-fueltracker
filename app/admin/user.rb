@@ -9,6 +9,10 @@ ActiveAdmin.register User do
       end
     end
 
+    def show
+      @page_title = 'Edit '+resource.name
+    end
+
     def edit
       @page_title = 'Edit '+resource.name
     end

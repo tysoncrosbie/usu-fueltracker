@@ -6,6 +6,10 @@ ActiveAdmin.register Plane do
       params.permit plane: [:fuel_type, :tail_number, :plane_type, :slug, :status]
     end
 
+    def show
+      @page_title = "Edit Plane w/Tail Number: "+resource.tail_number
+    end
+
     def edit
       @page_title = "Edit Plane w/Tail Number: "+resource.tail_number
     end

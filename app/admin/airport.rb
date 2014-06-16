@@ -12,6 +12,10 @@ ActiveAdmin.register Airport do
       end
     end
 
+    def show
+      @page_title = 'Edit '+resource.airport_name
+    end
+
     def edit
       @page_title = 'Edit '+resource.airport_name
     end
