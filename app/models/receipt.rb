@@ -7,7 +7,7 @@ class Receipt < ActiveRecord::Base
   has_many :non_fuel_charges, dependent: :destroy
 
 
-  friendly_id :receipt_number, use: [:slugged, :history]
+  friendly_id :title_candidates, use: [:slugged, :history]
   accepts_nested_attributes_for :non_fuel_charges, allow_destroy: true
 
 ## State Machine
@@ -29,5 +29,20 @@ class Receipt < ActiveRecord::Base
 ## Validations
   validates :receipt_number, :receipt_date, :vendor_name, presence: true
   validates :gallons, :fuel_cost, presence: true, numericality: true
+
+  def slug_plane
+    self.plane_id
+  end
+
+  def slug_date
+    self.receipt_date
+  end
+
+  def title_candidates
+    [
+      :receipt_number,
+      [:slug_plane, :slug_date, :receipt_number]
+    ]
+  end
 
 end
