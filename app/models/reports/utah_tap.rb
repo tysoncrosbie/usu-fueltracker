@@ -9,7 +9,7 @@ class UtahTap < Report
 
       %w(1A 1J).each do |code|
         receipts.each do |receipt|
-          csv << [code, '130', receipt.receipt_date, receipt.receipt_number, nil, nil, nil, nil, receipt.airport.faa_code, receipt.vendor_name, receipt.gallons]
+          csv << [code, '130', receipt.receipt_date, receipt.receipt_number, nil, nil, nil, nil, receipt.airport.faa_code, receipt.vendor_name, receipt.gallons.to_f.round(2)]
         end
       end
     end
