@@ -7,7 +7,7 @@ ActiveAdmin.register Plane do
     end
 
     def show
-      @page_title = "Edit Plane w/Tail Number: "+resource.tail_number
+      @page_title = "Tail Number: "+resource.tail_number
     end
 
     def edit

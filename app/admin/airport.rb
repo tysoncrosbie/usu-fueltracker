@@ -13,7 +13,7 @@ ActiveAdmin.register Airport do
     end
 
     def show
-      @page_title = 'Edit '+resource.airport_name
+      @page_title = resource.airport_name
     end
 
     def edit

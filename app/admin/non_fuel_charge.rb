@@ -8,7 +8,7 @@ ActiveAdmin.register NonFuelCharge do
     end
 
     def edit
-      @page_title = "Edit Non Fuel Charge for "+resource.student_name
+      @page_title = "Non Fuel Charge for "+resource.student_name
     end
 
     def create
