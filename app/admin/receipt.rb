@@ -93,7 +93,7 @@ ActiveAdmin.register Receipt do
   end
 
   filter :receipt_date
-  filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
+  # filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
   filter :receipt_number
   filter :vendor_name, as: :select
 
