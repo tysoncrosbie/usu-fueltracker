@@ -13,7 +13,7 @@ ActiveAdmin.register Receipt do
     end
 
     def edit
-      @page_title = "Receipt | Invoice number "+resource.receipt_number
+      @page_title = "Receipt / Invoice number "+resource.receipt_number
     end
 
     def create
@@ -66,12 +66,11 @@ ActiveAdmin.register Receipt do
       r.pending? ? status_tag('pending') : status_tag('verified', :ok)
     end
     column :receipt_date
-    column :receipt_number
-    column :airport_id do |i|
-      if i.airport_id.present?
-        u = Airport.find(i.airport_id)
-        "#{u.faa_code} - #{u.airport_name}"
-      end
+    column 'Receipt/ Invoice Number', sortable: :receipt_number do |r|
+      r.receipt_number
+    end
+    column :airport_id do |r|
+      "#{r.airport.faa_code} - #{r.airport.airport_name}"
     end
     column :vendor_name
     column :gallons
@@ -93,7 +92,7 @@ ActiveAdmin.register Receipt do
   end
 
   filter :receipt_date
-  # filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
+  filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
   filter :receipt_number
   filter :vendor_name, as: :select
 
