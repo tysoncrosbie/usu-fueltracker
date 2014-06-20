@@ -1,5 +1,7 @@
 ActiveAdmin.register Plane do
   menu parent: 'Settings'
+  config.sort_order = "tail_number_asc"
+
 
   controller do
     def permitted_params
@@ -58,10 +60,6 @@ ActiveAdmin.register Plane do
   scope :inactive
 
   index do
-    selectable_column
-    column :receipts do |p|
-      p.receipts.count
-    end
     column :status do |p|
       p.active? ? status_tag('active', :ok) : status_tag('inactive', :error)
     end
@@ -72,6 +70,9 @@ ActiveAdmin.register Plane do
       p.plane_type.upcase
     end
     column :fuel_type
+    column :total_receipts do |p|
+      link_to p.receipts.count, "receipts?utf8=✓&q%5Bplane_id_eq%5D=#{p.id}&commit=Filter&order=receipt_date_desc"
+    end
     actions
   end
 

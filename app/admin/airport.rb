@@ -1,5 +1,7 @@
 ActiveAdmin.register Airport do
   menu parent: 'Settings'
+  config.sort_order = "airport_name_asc"
+
 
   controller do
     def permitted_params
