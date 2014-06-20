@@ -3,7 +3,7 @@
     %h2="Welcome #{current_user.name}"
     %p.lead Select an action below.
     -if current_user.has_role? 'admin'
-      .btn.btn-info=link_to 'Administer', admin_root_path
+      .btn.btn-info=link_to 'Manage', admin_root_path
     -if current_user.has_role? 'dispatcher'
       .btn.btn-info=link_to 'Add Receipts', admin_receipts_path
     .btn.btn-warning=link_to 'Edit Profile', edit_admin_user_path(current_user)
