@@ -1,12 +1,16 @@
 ActiveAdmin.register Receipt do
   menu parent: 'Invoicing', priority: 0
   config.sort_order = "receipt_date_desc"
+  collection_action :autocomplete_receipt_vendor_name, method: :get
+
 
   before_filter :only => [:show] do
     @receipt = Receipt.friendly.find(params[:id])
   end
 
   controller do
+    autocomplete :receipt, :vendor_name, :scopes => [:unique_vendor]
+
     def permitted_params
       params.permit receipt: [:fuel_cost, :gallons, :id, :receipt_number, :receipt_date, :slug, :plane_id, :status, :airport_id, :vendor_name,
         non_fuel_charges_attributes: [:student_name, :charge_type, :amount, :id, :_destroy]
@@ -176,7 +180,7 @@ ActiveAdmin.register Receipt do
             hint: "Airport not listed? #{link_to('Create a new Airport', new_admin_airport_path)}".html_safe
           f.input :receipt_number, label: 'Receipt / Invoice number', hint: 'Receipt or Invoice number associated with charge.'
           f.input :receipt_date, as: :datepicker, hint: 'Date of charge.'
-          f.input :vendor_name
+          f.input :vendor_name, as: :autocomplete, url: autocomplete_receipt_vendor_name_admin_receipts_path
           f.input :gallons, label: "Total Gallons Purchased", placeholder: "000.0"
           f.input :fuel_cost, as: :number, label: "Fuel Total Cost", placeholder: "55.00"
         end
