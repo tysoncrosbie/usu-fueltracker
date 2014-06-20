@@ -9,7 +9,11 @@ ActiveAdmin.register Receipt do
   end
 
   controller do
-    autocomplete :receipt, :vendor_name, :scopes => [:unique_vendor]
+    autocomplete :receipt, :vendor_name
+
+    def autocomplete_receipt_vendor_name
+      render json: Receipt.select("DISTINCT vendor_name as value").where("LOWER(vendor_name) like LOWER(?)", "%#{params[:term]}%")
+    end
 
     def permitted_params
       params.permit receipt: [:fuel_cost, :gallons, :id, :receipt_number, :receipt_date, :slug, :plane_id, :status, :airport_id, :vendor_name,

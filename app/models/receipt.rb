@@ -25,7 +25,6 @@ class Receipt < ActiveRecord::Base
     scope name.to_sym, -> { where(status: name) }
   end
   scope :in_report, -> (starts_on, ends_on) { where('receipt_date BETWEEN ? AND ?', starts_on, ends_on) }
-  scope :unique_vendor, -> { select("DISTINCT(vendor_name)") }
 
 ## Validations
   validates :receipt_number, :receipt_date, :vendor_name, presence: true
