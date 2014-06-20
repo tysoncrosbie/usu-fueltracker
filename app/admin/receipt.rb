@@ -71,7 +71,7 @@ ActiveAdmin.register Receipt do
       r.pending? ? status_tag('pending') : status_tag('verified', :ok)
     end
     column :receipt_date
-    column 'Receipt/ Invoice Number', sortable: :receipt_number do |r|
+    column 'Invoice Number', sortable: :receipt_number do |r|
       r.receipt_number
     end
     column :airport_id do |r|
