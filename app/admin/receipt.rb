@@ -1,5 +1,6 @@
 ActiveAdmin.register Receipt do
   menu parent: 'Invoicing', priority: 0
+  config.sort_order = "receipt_date_desc"
 
   before_filter :only => [:show] do
     @receipt = Receipt.friendly.find(params[:id])
