@@ -56,10 +56,6 @@ ActiveAdmin.register NonFuelCharge do
   scope :verified
 
   index do
-    selectable_column
-    column :status do |r|
-      r.pending? ? status_tag('pending') : status_tag('verified', :ok)
-    end
     column :receipt_date do |n|
       r = Receipt.find(n.receipt_id)
       r.receipt_date.strftime('%B %e, %Y')
@@ -67,12 +63,15 @@ ActiveAdmin.register NonFuelCharge do
 
     column "Invoice Number", :receipt_id, sortable: :receipt_id do |n|
       r = Receipt.find(n.receipt_id)
-      link_to r.receipt_number, admin_receipt_path(r)
+      r.receipt_number
     end
     column :student_name
     column :charge_type
     column :amount do |nfc|
       number_to_currency(nfc.amount)
+    end
+    column :status do |r|
+      r.pending? ? status_tag('pending') : status_tag('verified', :ok)
     end
     column :actions do |nfc|
       [].tap do |links|

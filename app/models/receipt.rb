@@ -24,7 +24,8 @@ class Receipt < ActiveRecord::Base
   self.state_machines[:status].states.collect(&:name).each do |name|
     scope name.to_sym, -> { where(status: name) }
   end
-  scope :in_report, -> (starts_on, ends_on) { where('receipt_date BETWEEN ? AND ?', starts_on, ends_on) }
+  scope :in_report,             -> (starts_on, ends_on) { where('receipt_date BETWEEN ? AND ?', starts_on, ends_on) }
+  scope :with_non_fuel_charges, -> { joins(:non_fuel_charges) }
 
 ## Validations
   validates :receipt_number, :receipt_date, :vendor_name, presence: true

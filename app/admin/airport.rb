@@ -1,6 +1,7 @@
 ActiveAdmin.register Airport do
   menu parent: 'Settings'
   config.sort_order = "airport_name_asc"
+  actions :all, except: [:show]
 
 
   controller do
@@ -8,14 +9,14 @@ ActiveAdmin.register Airport do
       params.permit airport: [:city, :airport_name, :state, :faa_code]
     end
 
-     def create
+    def create
       super do |success,failure|
-        success.html { redirect_to admin_airports_path }
+        if current_user.has_role?(:admin)
+          success.html { redirect_to admin_airports_path }
+        else
+          success.html { redirect_to new_admin_receipt_path }
+        end
       end
-    end
-
-    def show
-      @page_title = resource.airport_name
     end
 
     def edit
@@ -25,6 +26,12 @@ ActiveAdmin.register Airport do
     def update
       super do |success,failure|
         success.html { redirect_to admin_airports_path }
+      end
+    end
+
+    def destroy
+      super do |success, failure|
+        success.html { redirect_to :back }
       end
     end
   end

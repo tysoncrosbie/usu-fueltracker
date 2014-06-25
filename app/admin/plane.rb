@@ -27,6 +27,12 @@ ActiveAdmin.register Plane do
         success.html { redirect_to admin_planes_path }
       end
     end
+
+    def destroy
+      super do |success, failure|
+        success.html { redirect_to :back }
+      end
+    end
   end
 
   # ACTIONS
