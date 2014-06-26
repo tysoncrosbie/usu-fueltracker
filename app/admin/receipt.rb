@@ -38,6 +38,12 @@ ActiveAdmin.register Receipt do
         success.html { redirect_to admin_receipts_path }
       end
     end
+
+    def destroy
+      super do |success, failure|
+        success.html { redirect_to :back, confirm: true }
+      end
+    end
   end
 
 # ACTIONS
