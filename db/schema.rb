@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605220049) do
+ActiveRecord::Schema.define(version: 20140712180636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140605220049) do
     t.decimal  "gallons"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "reimbursement"
   end
 
   add_index "receipts", ["airport_id"], name: "index_receipts_on_airport_id", using: :btree

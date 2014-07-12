@@ -49,18 +49,6 @@ feature %Q{
     expect(page).to have_content('Airport was successfully updated.')
   end
 
-  scenario 'View airport' do
-
-    within "##{dom_id(@airport)}" do
-      click_link 'View'
-    end
-
-    expect(page).to have_content(@airport.faa_code)
-    expect(page).to have_content(@airport.airport_name)
-    expect(page).to have_content(@airport.city)
-    expect(page).to have_content(@airport.state)
-  end
-
   scenario 'Delete airport' do
 
     within "##{dom_id(@airport)}" do

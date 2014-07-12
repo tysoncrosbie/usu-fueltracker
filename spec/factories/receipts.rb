@@ -7,6 +7,7 @@ FactoryGirl.define do
     vendor_name       { Faker::Name.name }
     gallons           { rand(900) }
     fuel_cost         { (rand(900) + 100).to_s + "." + (rand(1000) / 10).to_s }
+    reimbursement     { Faker::Name.name }
 
     trait :verified do
       after(:create) { |r| r.verify! }

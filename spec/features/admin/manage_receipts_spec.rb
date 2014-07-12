@@ -30,11 +30,12 @@ feature %Q{
 
     select_from_chosen "#{@plane.tail_number} - #{@plane.plane_type}", from: "Plane"
     select_from_chosen "#{@airport.faa_code} - #{@airport.airport_name} - #{@airport.city}, #{@airport.state}", from: 'Airport'
-    fill_in 'Receipt number',           with: attrs[:receipt_number]
+    fill_in 'receipt[receipt_number]',  with: attrs[:receipt_number]
     fill_in 'Vendor name',              with: attrs[:vendor_name]
     fill_in 'Total Gallons Purchased',  with: attrs[:gallons]
     fill_in 'Fuel Total Cost',          with: attrs[:fuel_cost]
     fill_in 'Receipt date',             with: attrs[:receipt_date].to_date
+    fill_in 'Reimbursement',            with: attrs[:reimbursement]
 
     click_link 'Add New Non fuel charge'
 
@@ -56,11 +57,12 @@ feature %Q{
 
     select_from_chosen "#{@plane.tail_number} - #{@plane.plane_type}", from: "Plane"
     select_from_chosen "#{@airport.faa_code} - #{@airport.airport_name} - #{@airport.city}, #{@airport.state}", from: 'Airport'
-    fill_in 'Receipt number',           with: attrs[:receipt_number]
+    fill_in 'receipt[receipt_number]',  with: attrs[:receipt_number]
     fill_in 'Vendor name',              with: attrs[:vendor_name]
     fill_in 'Total Gallons Purchased',  with: attrs[:gallons]
     fill_in 'Fuel Total Cost',          with: attrs[:fuel_cost]
     fill_in 'Receipt date',             with: attrs[:receipt_date].to_date
+    fill_in 'Reimbursement',            with: attrs[:reimbursement]
 
     fill_in 'Student name',             with: nfc_attrs[:student_name]
     fill_in 'Charge type',              with: nfc_attrs[:charge_type]
@@ -68,22 +70,6 @@ feature %Q{
 
     click_button 'Update Receipt'
     expect(page).to have_content('Receipt was successfully updated.')
-  end
-
-  scenario 'View receipt' do
-
-    within "##{dom_id(@receipt)}" do
-      click_link 'View'
-    end
-
-    expect(page).to have_content(@receipt.receipt_number)
-    expect(page).to have_content(@receipt.receipt_date.strftime('%B %d, %Y'))
-    expect(page).to have_content(@receipt.vendor_name)
-    expect(page).to have_content(@receipt.gallons)
-    expect(page).to have_content(@receipt.fuel_cost)
-    expect(page).to have_content(@nfc.student_name)
-    expect(page).to have_content(@nfc.charge_type)
-    expect(page).to have_content(@nfc.amount)
   end
 
   scenario 'Delete receipt' do

@@ -18,7 +18,7 @@ ActiveAdmin.register Receipt do
     end
 
     def permitted_params
-      params.permit receipt: [:fuel_cost, :gallons, :id, :receipt_number, :receipt_date, :slug, :plane_id, :status, :airport_id, :vendor_name,
+      params.permit receipt: [:fuel_cost, :gallons, :id, :receipt_number, :receipt_date, :slug, :plane_id, :status, :airport_id, :vendor_name, :reimbursement,
         non_fuel_charges_attributes: [:student_name, :charge_type, :amount, :id, :_destroy]
       ]
     end
@@ -78,13 +78,21 @@ ActiveAdmin.register Receipt do
   scope :pending
   scope :verified
   scope :with_non_fuel_charges
+  scope :with_reimbursement
 
 
   index do
+    column :status do |r|
+      r.pending? ? status_tag('pending') : status_tag('verified', :ok)
+    end
     column :receipt_date
     column 'Invoice Number', sortable: :receipt_number do |r|
       r.receipt_number
     end
+    column :tail_number do |r|
+      "#{r.plane.tail_number}"
+    end
+
     column :airport_id do |r|
       "#{r.airport.faa_code} - #{r.airport.airport_name}"
     end
@@ -93,9 +101,7 @@ ActiveAdmin.register Receipt do
     column :fuel_cost do |i|
       number_to_currency(i.fuel_cost)
     end
-    column :status do |r|
-      r.pending? ? status_tag('pending') : status_tag('verified', :ok)
-    end
+
     column :actions do |receipt|
       [].tap do |links|
         unless receipt.verified?
@@ -194,6 +200,7 @@ ActiveAdmin.register Receipt do
           f.input :vendor_name, as: :autocomplete, url: autocomplete_receipt_vendor_name_admin_receipts_path
           f.input :gallons, label: "Total Gallons Purchased", placeholder: "000.0"
           f.input :fuel_cost, as: :number, label: "Fuel Total Cost", placeholder: "55.00"
+          f.input :reimbursement, hint: 'Notes about reimbursement.', placeholder: 'John Doe'
         end
 
         f.inputs :non_fuel_charges do
