@@ -1,4 +1,5 @@
 ActiveAdmin.register Report do
+  index download_links: false
 
   controller do
     def permitted_params

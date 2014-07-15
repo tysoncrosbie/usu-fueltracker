@@ -86,21 +86,21 @@ ActiveAdmin.register Receipt do
       r.pending? ? status_tag('pending') : status_tag('verified', :ok)
     end
     column :receipt_date
-    column 'Invoice Number', sortable: :receipt_number do |r|
-      r.receipt_number
-    end
-    column :tail_number do |r|
-      "#{r.plane.tail_number}"
-    end
+    # column 'Invoice Number', sortable: :receipt_number do |r|
+    #   r.receipt_number
+    # end
+    # column :tail_number do |r|
+    #   "#{r.plane.tail_number}"
+    # end
 
-    column :airport_id do |r|
-      "#{r.airport.faa_code} - #{r.airport.airport_name}"
-    end
-    column :vendor_name
-    column :gallons
-    column :fuel_cost do |i|
-      number_to_currency(i.fuel_cost)
-    end
+    # column :airport_id do |r|
+    #   "#{r.airport.faa_code} - #{r.airport.airport_name}"
+    # end
+    # column :vendor_name
+    # column :gallons
+    # column :fuel_cost do |i|
+    #   number_to_currency(i.fuel_cost)
+    # end
 
     column :actions do |receipt|
       [].tap do |links|
@@ -121,65 +121,6 @@ ActiveAdmin.register Receipt do
   filter :plane_id, as: :select, collection: Plane.all.map {|p| ["#{p.tail_number.upcase} - #{p.plane_type}", p.id] }
   filter :receipt_number
   filter :vendor_name, as: :select
-
-  # show do
-  #   attributes_table do
-  #     row "Receipt | Invoice number" do |r|
-  #       r.receipt_number
-  #     end
-  #     row :status do |r|
-  #       r.verified? ? status_tag('verified', :ok) : status_tag('pending')
-  #     end
-  #     if receipt.pending?
-  #       row :action do |r|
-  #         link_to('Verify', verify_admin_receipt_path(r), method: :put)
-  #       end
-  #     else
-  #       nil
-  #     end
-  #     row :plane_id do |r|
-  #       p = Plane.find(r.plane_id)
-  #       "#{p.tail_number} - #{p.plane_type}"
-  #     end
-  #     row :receipt_date
-  #     row :vendor_name
-  #     row :airport do |r|
-  #       a = Airport.find(r.airport_id)
-  #       r.airport_id.present? ? "#{a.faa_code} - #{a.airport_name} - #{a.city}" : nil
-  #     end
-  #     row :gallons
-  #     row :fuel_cost do |r|
-  #       number_to_currency(r.fuel_cost)
-  #     end
-  #   end
-  #   if receipt.non_fuel_charges.present?
-  #     receipt.non_fuel_charges.each do |nfc|
-  #       panel 'Non-Fuel Charges' do
-  #         attributes_table_for receipt do
-  #           row :status do
-  #             nfc.verified? ? status_tag('verified', :ok) : status_tag('pending')
-  #           end
-  #           if nfc.pending?
-  #             row :action do
-  #               link_to('Verify', verify_admin_non_fuel_charge_path(nfc), method: :put)
-  #             end
-  #           else
-  #             nil
-  #           end
-  #           row :student_name do
-  #             nfc.student_name
-  #           end
-  #           row :charge_type do
-  #             nfc.charge_type
-  #           end
-  #           row :amount do |nf|
-  #             number_to_currency(nfc.amount)
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
 
   form do |f|
     f.form_buffers.last << f.send(:with_new_form_buffer) do
