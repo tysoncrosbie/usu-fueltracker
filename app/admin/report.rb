@@ -1,5 +1,4 @@
 ActiveAdmin.register Report do
-  index download_links: false
 
   controller do
     def permitted_params
@@ -46,7 +45,7 @@ ActiveAdmin.register Report do
     column :ends_on
     column '' do |resource|
       links = ''.html_safe
-      links += link_to "Download", resource_path(resource, format: 'csv'), :class => "member_link"
+      links += link_to "Download Report", resource_path(resource, format: 'csv'), :class => "member_link"
       links += link_to I18n.t('active_admin.edit'), edit_resource_path(resource), :class => "member_link edit_link"
       links += link_to I18n.t('active_admin.delete'), resource_path(resource), :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => "member_link delete_link"
       links
