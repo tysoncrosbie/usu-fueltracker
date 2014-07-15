@@ -8,6 +8,8 @@ describe Receipt do
   end
 
   context 'validations' do
+    it { should validate_presence_of(:airport_id) }
+    it { should validate_presence_of(:plane_id) }
     it { should validate_presence_of(:receipt_number) }
     it { should validate_presence_of(:receipt_date) }
     it { should validate_presence_of(:vendor_name) }

@@ -29,7 +29,7 @@ class Receipt < ActiveRecord::Base
   scope :with_reimbursement,    -> { where("reimbursement > ''")}
 
 ## Validations
-  validates :receipt_number, :receipt_date, :vendor_name, presence: true
+  validates :airport_id, :plane_id, :receipt_number, :receipt_date, :vendor_name, presence: true
   validates :gallons, :fuel_cost, presence: true, numericality: true
 
   def slug_id
