@@ -89,9 +89,9 @@ ActiveAdmin.register Receipt do
     column 'Invoice Number', sortable: :receipt_number do |r|
       r.receipt_number
     end
-    # column :tail_number do |r|
-    #   "#{r.plane.tail_number}"
-    # end
+    column :tail_number do |r|
+      "#{r.plane.tail_number}"
+    end
 
     # column :airport_id do |r|
     #   "#{r.airport.faa_code} - #{r.airport.airport_name}"
