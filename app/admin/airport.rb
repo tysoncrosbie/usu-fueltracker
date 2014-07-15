@@ -41,6 +41,7 @@ ActiveAdmin.register Airport do
   scope :out_of_state_airports
 
   index do
+    column :created_at
     column :airport_name
     column :faa_code
     column :location do |a|
