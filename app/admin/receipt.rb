@@ -92,14 +92,14 @@ ActiveAdmin.register Receipt do
     column :tail_number do |r|
       "#{r.plane.tail_number}"
     end
-    column :airport_id do |r|
-      "#{r.airport.faa_code} - #{r.airport.airport_name}"
-    end
-    # column :vendor_name
-    # column :gallons
-    # column :fuel_cost do |i|
-    #   number_to_currency(i.fuel_cost)
+    # column :airport_id do |r|
+    #   "#{r.airport.faa_code} - #{r.airport.airport_name}"
     # end
+    column :vendor_name
+    column :gallons
+    column :fuel_cost do |i|
+      number_to_currency(i.fuel_cost)
+    end
 
     column :actions do |receipt|
       [].tap do |links|
