@@ -92,9 +92,9 @@ ActiveAdmin.register Receipt do
     column :tail_number do |r|
       "#{r.plane.tail_number}"
     end
-    # column :airport_id do |r|
-    #   "#{r.airport.faa_code} - #{r.airport.airport_name}"
-    # end
+    column :airport do |r|
+      "#{r.airport.faa_code} - #{r.airport.airport_name}"
+    end
     column :vendor_name
     column :gallons
     column :fuel_cost do |i|
