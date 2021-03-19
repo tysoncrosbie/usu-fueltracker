@@ -19,7 +19,7 @@ feature %Q{
     end
   end
 
-  scenario 'Create airport' do
+  scenario 'Create airport', js: true do
     click_link 'New Airport'
 
     attrs = attributes_for(:airport)
@@ -33,7 +33,7 @@ feature %Q{
     expect(page).to have_content('Airport was successfully created.')
   end
 
-  scenario 'Update airport' do
+  scenario 'Update airport', js: true do
     within "##{dom_id(@airport)}" do
       click_link 'Edit'
     end
@@ -49,7 +49,7 @@ feature %Q{
     expect(page).to have_content('Airport was successfully updated.')
   end
 
-  scenario 'Delete airport' do
+  scenario 'Delete airport', js: true do
 
     within "##{dom_id(@airport)}" do
       click_link 'Delete'

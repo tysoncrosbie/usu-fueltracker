@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 feature %Q{
-  As a Dispatcher
+  As an Admin
   ISBAT manage receipts
 }, ' -' do
 
   before do
-    @dispatcher = create :dispatcher
+    @admin      = create :admin
     @receipt    = create :receipt
     @nfc        = create :non_fuel_charge, receipt_id: @receipt.id
     @plane      = create :plane
     @airport    = create :airport
 
 
-    login_as(@dispatcher, scope: :user)
+    login_as(@admin, scope: :user)
     visit admin_root_path
 
     within '#header' do

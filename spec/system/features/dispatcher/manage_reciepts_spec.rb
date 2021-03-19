@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 feature %Q{
-  As an Admin
+  As a Dispatcher
   ISBAT manage receipts
 }, ' -' do
 
   before do
-    @admin      = create :admin
+    @dispatcher = create :dispatcher
     @receipt    = create :receipt
     @nfc        = create :non_fuel_charge, receipt_id: @receipt.id
     @plane      = create :plane
     @airport    = create :airport
 
 
-    login_as(@admin, scope: :user)
+    login_as(@dispatcher, scope: :user)
     visit admin_root_path
 
     within '#header' do
@@ -72,7 +72,7 @@ feature %Q{
     expect(page).to have_content('Receipt was successfully updated.')
   end
 
-  scenario 'Delete receipt' do
+  scenario 'Delete receipt', js: true do
 
     within "##{dom_id(@receipt)}" do
       click_link 'Delete'
