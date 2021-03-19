@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :receipt do
     receipt_number    { Faker::Name.name }
     receipt_date      { Time.now - 1.week }

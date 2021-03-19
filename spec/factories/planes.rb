@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :plane do
     tail_number    { (rand(900) + 100).to_s + "N" }
     plane_type     { Faker::Name.first_name }

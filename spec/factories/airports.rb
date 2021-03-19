@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :airport do
     airport_name        { Faker::Name.name }
     city                { Faker::Address.city }

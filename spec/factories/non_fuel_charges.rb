@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :non_fuel_charge do
     student_name    { Faker::Name.name }
     charge_type     { Faker::Name.name }

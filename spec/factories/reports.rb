@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :report, class: 'Report' do
     name        { Faker::Name.name }
     starts_on   { Time.now - 1.week }
