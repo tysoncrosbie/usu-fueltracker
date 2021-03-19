@@ -74,36 +74,30 @@ ActiveAdmin.register User do
   filter :email
 
   form do |f|
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div do
-        f.semantic_errors
+    f.template.content_tag :div do
+      f.semantic_errors
+    end
+
+    f.template.content_tag :div, class: 'main-form' do
+      f.inputs :user_details do
+        f.input :name
+        f.input :email
+        f.input :anumber
+      end
+
+      f.inputs :passwords, label: "Update Passwords" do
+        f.input :password
+        f.input :password_confirmation
       end
     end
 
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div, class: 'main-form' do
-        f.inputs :user_details do
-          f.input :name
-          f.input :email
-          f.input :anumber
+    f.template.content_tag(:aside) do
+      if current_user.has_role?(:admin)
+        f.inputs :roles do
+          f.input :role_ids, as: :check_boxes, collection: Role.all.accessible_by(current_ability).collect {|r| [r.name.humanize, r.id]}, label: false
         end
-
-        f.inputs :passwords, label: "Update Passwords" do
-          f.input :password
-          f.input :password_confirmation
-        end
-      end
-    end
-
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag(:aside) do
-        if current_user.has_role?(:admin)
-          f.inputs :roles do
-            f.input :role_ids, as: :check_boxes, collection: Role.all.accessible_by(current_ability).collect {|r| [r.name.humanize, r.id]}, label: false
-          end
-        else
-          nil
-        end
+      else
+        nil
       end
     end
 

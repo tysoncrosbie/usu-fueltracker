@@ -65,22 +65,17 @@ ActiveAdmin.register Airport do
   end
 
   form do |f|
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div do
-        f.semantic_errors
-      end
+    f.template.content_tag :div do
+      f.semantic_errors
     end
 
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div, class: 'main-form' do
+    f.template.content_tag :div, class: 'main-form' do
 
-        f.inputs :airport_details do
-          f.input :faa_code, placeholder: 'LGU'
-          f.input :airport_name, placeholder: 'Logan-Cache Airport'
-          f.input :city, label: 'City/State', placeholder: 'Logan'
-          f.input :state, label: false, placeholder: 'UT'
-        end
-
+      f.inputs :airport_details do
+        f.input :faa_code, placeholder: 'LGU'
+        f.input :airport_name, placeholder: 'Logan-Cache Airport'
+        f.input :city, label: 'City/State', placeholder: 'Logan'
+        f.input :state, label: false, placeholder: 'UT'
       end
     end
 

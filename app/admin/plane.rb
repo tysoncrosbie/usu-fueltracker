@@ -102,23 +102,19 @@ ActiveAdmin.register Plane do
   end
 
   form do |f|
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div do
-        f.semantic_errors
-      end
+    f.template.content_tag :div do
+      f.semantic_errors
     end
 
-    f.form_buffers.last << f.send(:with_new_form_buffer) do
-      f.template.content_tag :div, class: 'main-form' do
-        f.inputs :plane_details do
-          f.input :tail_number, placeholder: 'N44740'
-          f.input :plane_type, placeholder: 'ARROW'
-          f.input :fuel_type, as: :radio, collection: Plane.all.map(&:fuel_type).uniq
-        end
+    f.template.content_tag :div, class: 'main-form' do
+      f.inputs :plane_details do
+        f.input :tail_number, placeholder: 'N44740'
+        f.input :plane_type, placeholder: 'ARROW'
+        f.input :fuel_type, as: :radio, collection: Plane.all.map(&:fuel_type).uniq
+      end
 
-        f.inputs :plane_status do
-          f.input :status, as: :radio, collection: [:active, :inactive], member_label: -> (s) { (s.to_s.humanize) }
-        end
+      f.inputs :plane_status do
+        f.input :status, as: :radio, collection: [:active, :inactive], member_label: -> (s) { (s.to_s.humanize) }
       end
     end
 
