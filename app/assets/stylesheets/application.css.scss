@@ -5,7 +5,10 @@
  *= require formtastic-bootstrap
  *= require_self
  *= require frontend
+ *= require jquery-ui
+ *= require chosen
 */
 
+@import "bourbon";
 @import "bootstrap";
 @import "bootstrap/theme";
