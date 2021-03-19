@@ -10,6 +10,8 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+.env
+
 # bundler state
 /.bundle
 /vendor/bundle/
@@ -19,6 +21,8 @@
 db/*.sqlite3
 /log/*
 /tmp/*
+usufueltracker_development
+usufueltracker_test
 
 # various artifacts
 **.war
@@ -27,6 +31,7 @@ db/*.sqlite3
 .rspec
 .redcar/
 .sass-cache
+
 /config/config.yml
 /config/database.yml
 /coverage.data

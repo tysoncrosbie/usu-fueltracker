@@ -1,0 +1,37 @@
+version: "3.8"
+
+volumes:
+  db-data:
+    external: false
+
+services:
+  web:
+    build:
+      context: .
+    environment:
+      HUB_URL: http://chrome:4444/wd/hub # <-- Add the HUB_URL environment variable
+    depends_on:
+      - chrome # <-- Link to the chrome container
+
+  chrome:
+    image: selenium/standalone-chrome:3.141.0-zirconium # this version should match that of the selenium-webdriver gem (see Gemfile)
+    volumes:
+      - /dev/shm:/dev/shm
+
+  db:
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    image: postgres:11.0
+    volumes:
+      - db-data:/usr/local/pgsql/data
+
+  app:
+    env_file: .env
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
