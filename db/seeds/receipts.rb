@@ -1,7 +1,6 @@
 puts
 puts 'Seeding Receipts'
 
-limit = nil
+limit = 20
 
 ReceiptImporter.run! limit
-
