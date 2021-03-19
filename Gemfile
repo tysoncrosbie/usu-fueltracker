@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.2.10'
-gem 'rails', '4.2'
+ruby '~> 2.4'
+gem 'rails', '~> 4.2.8'
 
-gem 'activeadmin',          '~> 1.0.0.pre5'
+gem 'activeadmin',          '~> 1.0.0'
 # gem 'activeadmin-extra',    git: 'https://github.com/stefanoverna/activeadmin-extra'
 
 gem 'rails4-autocomplete',  '~> 1.1.0'
