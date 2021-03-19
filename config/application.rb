@@ -11,7 +11,7 @@ module AviationFuelTracker
 
     config.generators do |g|
       g.test_framework :rspec, fixtures: true
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.fixture_replacement :factory_bot_rails, dir: "spec/factories"
       g.view_specs false
       g.helper_specs false
     end

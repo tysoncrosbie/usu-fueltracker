@@ -5,6 +5,7 @@ SimpleCov.start 'rails'
 ENV["RAILS_ENV"] ||= 'test'
 require 'rails_helper'
 require File.expand_path("../../config/environment", __FILE__)
+require 'chosen-rails/rspec'
 require 'rspec/rails'
 require 'capybara/rspec'
 
@@ -35,6 +36,14 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.before(:each, type: :system) do
+    driven_by :chrome_headless
+
+    Capybara.app_host = "http://#{IPSocket.getaddress(Socket.gethostname)}:3000"
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 3000
+    Capybara.server = :puma
+  end
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
