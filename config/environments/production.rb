@@ -60,12 +60,7 @@ AviationFuelTracker::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w(
-    active_admin.js
-    active_admin.css
-    compatibility/html5shiv
-    compatibility/respond.min
-  )
+  config.assets.precompile ["manifest.js"]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
